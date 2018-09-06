@@ -74,15 +74,6 @@ $containerName = "datalocks-uploads"
 New-AzureStorageContainer -Name $containerName -Context $strcontext
 ```
 
-Access keys and strings for for datalockssa
-```
- 72WjNT0uGfOh2tzs5JI2hyMKREoKci2dlBkkP9/xywJ0hqL4M4UljfGHEXYFKSU+zwh6XogOjBGB1rFxRNggcA==
-```
-
-Connection string
-```
-DefaultEndpointsProtocol=https;AccountName=datalockssa;AccountKey=72WjNT0uGfOh2tzs5JI2hyMKREoKci2dlBkkP9/xywJ0hqL4M4UljfGHEXYFKSU+zwh6XogOjBGB1rFxRNggcA==;EndpointSuffix=core.windows.net
-```
 
 To do this on local storage:
 
@@ -125,8 +116,7 @@ $location = "uk west"
 
 # Set an admin login and password for your server
 $adminlogin = "ServerAdmin"
-$password = "ChangeYourAdminPassword1"
-#$password = "Password1"
+$password = ""
 # Set server name - the logical server name has to be unique in the system
 $servername = "server-$(Get-Random)"
 

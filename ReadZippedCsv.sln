@@ -10,8 +10,6 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{1BF2B1AB-AA9B-491A-964F-B2C449FF575F}"
 	ProjectSection(SolutionItems) = preProject
 		readme.md = readme.md
-		SetupAzure.dev.ps1 = SetupAzure.dev.ps1
-		SetupAzure.ps1 = SetupAzure.ps1
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ReadZippedCsv.Functions", "ReadZippedCsv.Functions\ReadZippedCsv.Functions.csproj", "{3ACE3B5A-915F-41B4-AAAE-3EB34ABE9788}"
@@ -20,7 +18,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ReadZippedCsv.Application",
 EndProject
 Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "DataLocks.Database", "DataLocks.Database\DataLocks.Database.sqlproj", "{E4EACFBD-EA8A-40ED-8EFA-283FCDA5D9B0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReadZippedCsv.Data", "ReadZippedCsv.Data\ReadZippedCsv.Data.csproj", "{C3B74CA8-37C1-4FA0-8A57-23DFF76A5F75}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ReadZippedCsv.Data", "ReadZippedCsv.Data\ReadZippedCsv.Data.csproj", "{C3B74CA8-37C1-4FA0-8A57-23DFF76A5F75}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
