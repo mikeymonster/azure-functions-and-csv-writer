@@ -23,7 +23,7 @@ namespace ReadZippedCsv.Application
 
             ProcessorFactory = processorFactory ?? new DatabaseUpdateProcessorFactory(repository, configuration);
         }
-
+        
         public void Process(string inputFilePath)
         {
             using (var stream = File.OpenRead(inputFilePath))

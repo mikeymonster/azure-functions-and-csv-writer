@@ -7,8 +7,9 @@ using ReadZippedCsv.Data.Entities;
 
 namespace ReadZippedCsv.Application.Processors
 {
-    public class DataLockSqlScriptProcessor : ProcessorBase<DataLock>, IProcessor
+    public class DataLockSqlScriptProcessor : ProcessorBase<DataLock>, IProcessor, IFileOutputProcessor
     {
+        public StreamWriter FileStreamWriter { get; set; }
 
         public DataLockSqlScriptProcessor(IConfigurationRoot configuration)
             : base(configuration)
@@ -20,10 +21,10 @@ namespace ReadZippedCsv.Application.Processors
 
         public void Process(Stream stream)
         {
-            var filePath = GetSqlFilePath(SqlFileNamePrefix);
-            using (var file = new StreamWriter(filePath))
-            {
-                WriteSqlPrologue(file);
+            //var filePath = GetSqlFilePath(SqlFileNamePrefix);
+            //using (var file = new StreamWriter(filePath))
+            //{
+                WriteSqlPrologue(FileStreamWriter);
 
                 foreach (var item in GetData<DataLock>(stream))
                 {
@@ -50,13 +51,13 @@ namespace ReadZippedCsv.Application.Processors
                     sb.Append($"{item.TNP}");
                     sb.Append(")");
 
-                    file.WriteLine(sb.ToString());
+                    FileStreamWriter.WriteLine(sb.ToString());
                 }
 
-                WriteSqlEpilogue(file);
+                WriteSqlEpilogue(FileStreamWriter);
 
-                Console.WriteLine($"Created file {filePath}");
-            }
+                //Console.WriteLine($"Created file {filePath}");
+            //}
         }
     }
 }

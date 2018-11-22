@@ -98,11 +98,16 @@ Set-AzureStorageBlobContent -Blob $($file.Name) -Container $containerName -File 
 text $strcontext
 ```
 
-To send file as an http post
-
+To send file as an http post 
+https://stackoverflow.com/questions/38164723/uploading-file-to-http-via-powershell 
 ```
 $uri = "http://localhost:7071/api/UpdateDataLocksHttp"
 $uploadPath = "C:\Users\mike\Downloads\Reports 20180828-051544.zip"
+Invoke-RestMethod -Uri $uri -Method Post -InFile $uploadPath -UseDefaultCredentials
+
+#New functions (V2)
+$uri = "http://localhost:7071/api/UpdateDataLocks"
+$uploadPath = "C:\Users\mike\Downloads\Reports 20180926-051521.zip"
 Invoke-RestMethod -Uri $uri -Method Post -InFile $uploadPath -UseDefaultCredentials
 ```
 

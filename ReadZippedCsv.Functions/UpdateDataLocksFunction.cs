@@ -8,7 +8,6 @@ using Microsoft.Azure.WebJobs.Extensions.Http;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using ReadZippedCsv.Application.Interfaces;
-using ReadZippedCsv.Application.Processors;
 using ReadZippedCsv.Functions.IoC;
 
 namespace ReadZippedCsv.Functions

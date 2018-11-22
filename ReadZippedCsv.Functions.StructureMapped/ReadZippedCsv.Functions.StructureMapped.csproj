@@ -4,15 +4,8 @@
     <AzureFunctionsVersion>v2</AzureFunctionsVersion>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Remove="IoC\ScopeCleanupFilter.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <PackageReference Include="Microsoft.Azure.WebJobs.Extensions.Storage" Version="3.0.0" />
-    <PackageReference Include="Microsoft.NET.Sdk.Functions" Version="1.0.22" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\ReadZippedCsv.Application\ReadZippedCsv.Application.csproj" />
-    <ProjectReference Include="..\ReadZippedCsv.Data\ReadZippedCsv.Data.csproj" />
+    <PackageReference Include="Microsoft.NET.Sdk.Functions" Version="1.0.19" />
+    <PackageReference Include="StructureMap" Version="4.7.0" />
   </ItemGroup>
   <ItemGroup>
     <None Update="host.json">
@@ -22,5 +15,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <CopyToPublishDirectory>Never</CopyToPublishDirectory>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ReadZippedCsv.Application\ReadZippedCsv.Application.csproj" />
+    <ProjectReference Include="..\ReadZippedCsv.Data\ReadZippedCsv.Data.csproj" />
   </ItemGroup>
 </Project>

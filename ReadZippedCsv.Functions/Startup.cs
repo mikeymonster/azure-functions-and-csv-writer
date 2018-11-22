@@ -1,5 +1,7 @@
 ﻿using Microsoft.Azure.WebJobs;
+using Microsoft.Azure.WebJobs.Host;
 using Microsoft.Azure.WebJobs.Hosting;
+using Microsoft.Extensions.DependencyInjection;
 using ReadZippedCsv.Functions;
 using ReadZippedCsv.Functions.IoC;
 
@@ -16,6 +18,9 @@ namespace ReadZippedCsv.Functions
             //    .Build();
 
             //https://github.com/Azure/azure-webjobs-sdk/issues/1865#issuecomment-417958408
+
+            //Registering a filter
+            //builder.Services.AddSingleton<IFunctionFilter, ScopeCleanupFilter>();
 
             //builder.Services.AddTransient<IZipFileProcessor, ZipFileProcessor>();
             builder.AddExtension<InjectConfiguration>();

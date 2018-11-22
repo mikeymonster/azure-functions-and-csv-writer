@@ -4,12 +4,14 @@ using System.IO.Compression;
 using Microsoft.Extensions.Configuration;
 using ReadZippedCsv.Application.Factories;
 using ReadZippedCsv.Application.Interfaces;
-using ReadZippedCsv.Application.Processors;
+using ReadZippedCsv.Application.Helpers;
 
 namespace ReadZippedCsv.Application
 {
     public class ZipFileToSqlScriptsProcessor : IZipFileProcessor
     {
+        public const string SqlFileNamePrefix = "Data_Locks_Insert_";
+
         public IConfigurationRoot Configuration { get; private set; }
 
         public IProcessorFactory ProcessorFactory { get; private set; }
@@ -32,17 +34,35 @@ namespace ReadZippedCsv.Application
         {
             using (var zipArchive = new ZipArchive(stream, ZipArchiveMode.Read))
             {
-                foreach (var entry in zipArchive.Entries)
+                var directory = Configuration?["scriptOutputDirectory"] ?? $@"C:\temp\";
+                var filePath = Helpers.FileHelpers.GetSqlFilePath(directory, SqlFileNamePrefix);
+
+                using (var fileStreamWriter = new StreamWriter(filePath))
                 {
-                    Console.WriteLine($"Processing zip file entry: {entry.Name}");
-                    using (var entryStream = entry.Open())
+                    foreach (var entry in zipArchive.Entries)
                     {
-                        ProcessorFactory
-                            .GetProcessor(entry.Name)
-                            .Process(entryStream);
+                        Console.WriteLine($"Processing zip file entry: {entry.Name}");
+                        using (var entryStream = entry.Open())
+                        {
+                            var processor = ProcessorFactory.GetProcessor(entry.Name);
+                            ((IFileOutputProcessor) processor).FileStreamWriter = fileStreamWriter;
+                                processor.Process(entryStream);
+                        }
                     }
+
+                    WriteSqlEpilogue(fileStreamWriter);
                 }
             }
+        }
+
+        private void WriteSqlEpilogue(StreamWriter fileStreamWriter)
+        {
+            fileStreamWriter.WriteLine("");
+            fileStreamWriter.WriteLine("/*"); 
+            fileStreamWriter.WriteLine("SELECT * FROM [Data_Lock].[DAS_DataLocks]"); 
+            fileStreamWriter.WriteLine("SELECT * FROM [Data_Lock].[DAS_ValidAims]"); 
+            fileStreamWriter.WriteLine("SELECT * FROM [Data_Lock].[DAS_ValidLearners]"); 
+            fileStreamWriter.WriteLine("*/"); 
         }
     }
 }

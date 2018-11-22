@@ -25,9 +25,9 @@ namespace ReadZippedCsv.Functions.IoC
             //See https://github.com/Azure/azure-functions-core-tools/issues/684
             //Or better: https://github.com/Azure/azure-webjobs-sdk/issues/1865#issuecomment-417958408
             // 
-            //var registry = context...Config.GetService<IExtensionRegistry>();
+            //var registry = context.Config.GetService<IExtensionRegistry>();
             //var filter = new ScopeCleanupFilter();
-            //registry.RegisterExtension(typeof(IFunctionInvocationFilter), filter);
+            //regiserExtensitry.Registon(typeof(IFunctionInvocationFilter), filter);
             //registry.RegisterExtension(typeof(IFunctionExceptionFilter), filter);
 
 

@@ -56,18 +56,18 @@ namespace ReadZippedCsv.Application.Processors
             }
         }
 
-        protected string GetSqlFilePath(string prefix)
-        {
-            string directory = null;
-            if (Configuration != null)
-            {
-                directory = Configuration["scriptOutputDirectory"];
-            }
-            directory = directory ?? $@"C:\temp\";
+        //protected string GetSqlFilePath(string prefix)
+        //{
+        //    string directory = null;
+        //    if (Configuration != null)
+        //    {
+        //        directory = Configuration["scriptOutputDirectory"];
+        //    }
+        //    directory = directory ?? $@"C:\temp\";
 
-            return Path.Combine(directory,
-                $@"{prefix}_{DateTime.Now:dd_MM_yyyy_HH_mm_ss}.sql");
-        }
+        //    return Path.Combine(directory,
+        //        $@"{prefix}_{DateTime.Now:dd_MM_yyyy_HH_mm_ss}.sql");
+        //}
 
         protected void WriteSqlPrologue(StreamWriter file)
         {

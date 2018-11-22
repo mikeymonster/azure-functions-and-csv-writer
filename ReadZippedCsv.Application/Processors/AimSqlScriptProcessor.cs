@@ -7,8 +7,10 @@ using ReadZippedCsv.Data.Entities;
 
 namespace ReadZippedCsv.Application.Processors
 {
-    public class AimSqlScriptProcessor : ProcessorBase<Aim>, IProcessor
+    public class AimSqlScriptProcessor : ProcessorBase<Aim>, IProcessor, IFileOutputProcessor
     {
+        public StreamWriter FileStreamWriter { get; set; }
+
         public AimSqlScriptProcessor(IConfigurationRoot configuration)
             : base(configuration)
         {
@@ -19,10 +21,10 @@ namespace ReadZippedCsv.Application.Processors
         
         public void Process(Stream stream)
         {
-            var filePath = GetSqlFilePath(SqlFileNamePrefix);
-            using (var file = new StreamWriter(filePath))
-            {
-                WriteSqlPrologue(file);
+            //var filePath = GetSqlFilePath(SqlFileNamePrefix);
+            //using (var file = new StreamWriter(filePath))
+            //{
+                WriteSqlPrologue(FileStreamWriter);
 
                 foreach (var item in GetData<Aim>(stream))
                 {
@@ -37,12 +39,12 @@ namespace ReadZippedCsv.Application.Processors
                     sb.Append($"{item.NumberOfLearnersWithACT2}");
                     sb.Append(")");
 
-                    file.WriteLine(sb.ToString());
-                }
+                    FileStreamWriter.WriteLine(sb.ToString());
+                //}
 
-                WriteSqlEpilogue(file);
+                WriteSqlEpilogue(FileStreamWriter);
 
-                Console.WriteLine($"Created file {filePath}");
+                //Console.WriteLine($"Created file {filePath}");
             }
         }
     }
